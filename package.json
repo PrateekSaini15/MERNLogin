@@ -1,0 +1,26 @@
+{
+  "name": "mernlogin",
+  "version": "1.0.0",
+  "description": "Sample project for looking at the functionality of login system",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrateekSaini15/MERNLogin.git"
+  },
+  "keywords": [
+    "mongodb",
+    "express",
+    "react",
+    "node",
+    "mern"
+  ],
+  "author": "Prateek Saini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PrateekSaini15/MERNLogin/issues"
+  },
+  "homepage": "https://github.com/PrateekSaini15/MERNLogin#readme"
+}
