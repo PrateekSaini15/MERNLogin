@@ -18,3 +18,13 @@
 ### In Development
 
 1. nodemon
+
+## Packages for Frontend
+
+1. axios
+2. classnames
+3. jwt-decode
+4. react-redux
+5. react-router-dom
+6. redux
+7. redux-thunk
