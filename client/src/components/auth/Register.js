@@ -1,5 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
+import classnames from "classnames";
 
 class Register extends React.Component {
   constructor() {
@@ -11,6 +15,12 @@ class Register extends React.Component {
       password2: "",
       errors: {},
     };
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
 
   onChange = (e) => {
@@ -26,7 +36,7 @@ class Register extends React.Component {
       password: this.state.password,
       password2: this.state.password2,
     };
-    console.log(newUser);
+    this.props.registerUser(newUser, this.props.history);
   };
 
   render() {
@@ -55,8 +65,10 @@ class Register extends React.Component {
                   error={errors.name}
                   id="name"
                   type="text"
+                  className={classnames("", { invalid: errors.name })}
                 />
                 <label htmlFor="name">Name</label>
+                <span className="red-text">{errors.name}</span>
               </div>
               <div className="input-field col s12">
                 <input
@@ -65,8 +77,12 @@ class Register extends React.Component {
                   error={errors.email}
                   id="email"
                   type="email"
+                  className={classnames("", {
+                    invalid: errors.email,
+                  })}
                 />
                 <label htmlFor="email">Email</label>
+                <span className="red-text">{errors.email}</span>
               </div>
               <div className="input-field col s12">
                 <input
@@ -75,8 +91,10 @@ class Register extends React.Component {
                   error={errors.password}
                   id="password"
                   type="password"
+                  className={classnames("", { invalid: errors.password })}
                 />
                 <label htmlFor="password">Password</label>
+                <span className="red-text">{errors.password}</span>
               </div>
               <div className="input-field col s12">
                 <input
@@ -85,8 +103,10 @@ class Register extends React.Component {
                   error={errors.password2}
                   id="password2"
                   type="password"
+                  className={classnames("", { invalid: errors.password2 })}
                 />
                 <label htmlFor="password2">Confirm Password</label>
+                <span className="red-text">{errors.password2}</span>
               </div>
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                 <button
@@ -110,4 +130,15 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));
