@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 const databaseURL = require("./config/keys").mongoURI;
+const users = require("./routes/api/users");
 
 const app = express();
 
@@ -16,6 +18,11 @@ mongoose.connect(databaseURL, {
 const db = mongoose.connection;
 db.on("error", (error) => console.log(error));
 db.once("open", () => console.log("Connected to database"));
+
+app.use(passport.initialize());
+require("./config/passport")(passport);
+
+app.use("/api/users", users);
 
 const port = process.env.PORT || 5000;
 

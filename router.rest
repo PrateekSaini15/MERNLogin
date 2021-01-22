@@ -1,0 +1,19 @@
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+    "name": "Prateek Saini",
+    "email": "prateek.saini@somewhere.com",
+    "password": "prateek123",
+    "password2": "prateek123"
+}
+
+###
+
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "prateek.saini@somewhere.com",
+    "password": "prateek123"
+}
